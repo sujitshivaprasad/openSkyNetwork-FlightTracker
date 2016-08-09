@@ -33,7 +33,13 @@ class flights():
 	def locSearch(self, loc):
 		for index, country in enumerate(self.origin_country):
 			if loc == country:
-				print self.callsign[index]
+				if len(self.callsign[index]) > 0:
+					print self.callsign[index]
+				if self.altitude[index]:
+					print self.altitude[index]
+				if self.heading[index]:
+					print self.heading[index]										
+
 
 
 if __name__ == "__main__":
