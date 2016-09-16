@@ -35,41 +35,43 @@ class flights():
 
 	def requestCountry(self):
 		countries = c.Counter(self.origin_country)
-		#print sorted(countries)
+		print 'Aircraft origin countries found:'
+		for elem in sorted(countries):
+			print elem
+		print '----------------------------'
 
 
 	def locSearch(self, loc):
 		for index, country in enumerate(self.origin_country):
 			if loc == country:
 				if len(self.callsign[index]) > 0:
-					print self.callsign[index]
+					print 'Aircraft callsign: '+ self.callsign[index]
 				if self.altitude[index]:
-					print self.altitude[index]
+					print 'Altitude: ' + str(self.altitude[index])
 				if self.heading[index]:
-					print self.heading[index]										
+					print 'Heading: ' + str(self.heading[index])
 
 
 
 if __name__ == "__main__":
-	# if len(sys.argv) > 1:
-	# 	loc = sys.argv[1]
-	# else:
-	# 	print 'Please Input Parameter.'
-	# 	sys.exit()
 	ap = argparse.ArgumentParser(description ='Grab the required aircraft detail')
 	ap.add_argument('-c', help="origin country")
 	if len(sys.argv) > 1:
 		opts = vars(ap.parse_args())
 		country = opts.values()
 		loc = ' '.join(country)
+
+		myFlight = flights()
+		myFlight.getData()
+		myFlight.requestCountry()
+		myFlight.locSearch(loc)
 	else:
-		sys.exit()
+		myFlight = flights()
+		myFlight.getData()
+		myFlight.requestCountry()
 
 
-	myFlight = flights()
-	myFlight.getData()
-	myFlight.requestCountry()
-	myFlight.locSearch(loc)
+
 
 
 
