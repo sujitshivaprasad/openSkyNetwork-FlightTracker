@@ -1,6 +1,8 @@
 # OpenSky API
 from opensky_api import OpenSkyApi
 import sys
+import collections as c
+import argparse
 
 
 class flights():
@@ -23,12 +25,18 @@ class flights():
 			self.latitude.append(s.latitude)
 			self.longitude.append(s.longitude)
 			self.on_ground.append(s.on_ground)
-			self.origin_country.append(s.origin_country)
+			self.origin_country.append(str(s.origin_country))
 			self.sensors.append(s.sensors)
 			self.time_position.append(s.time_position)
 			self.time_velocity.append(s.time_velocity)
 			self.velocity.append(s.velocity)
 			self.vertical_rate.append(s.vertical_rate)
+
+
+	def requestCountry(self):
+		countries = c.Counter(self.origin_country)
+		#print sorted(countries)
+
 
 	def locSearch(self, loc):
 		for index, country in enumerate(self.origin_country):
@@ -43,9 +51,28 @@ class flights():
 
 
 if __name__ == "__main__":
-	loc = sys.argv[1]
+	# if len(sys.argv) > 1:
+	# 	loc = sys.argv[1]
+	# else:
+	# 	print 'Please Input Parameter.'
+	# 	sys.exit()
+	ap = argparse.ArgumentParser(description ='Grab the required aircraft detail')
+	ap.add_argument('-c', help="origin country")
+	if len(sys.argv) > 1:
+		opts = vars(ap.parse_args())
+		country = opts.values()
+		loc = ' '.join(country)
+	else:
+		sys.exit()
+
+
 	myFlight = flights()
 	myFlight.getData()
+	myFlight.requestCountry()
 	myFlight.locSearch(loc)
+
+
+
+
 
 
