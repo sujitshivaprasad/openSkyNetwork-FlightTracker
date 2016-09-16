@@ -50,11 +50,30 @@ class flights():
 					print 'Altitude: ' + str(self.altitude[index])
 				if self.heading[index]:
 					print 'Heading: ' + str(self.heading[index])
+				if self.icao24[index]:
+					print 'ICAO24 address of the transmitter: ' + str(self.icao24[index])
+				if self.latitude[index]:
+					print 'Latitude: ' + str(self.latitude[index])
+				if self.longitude[index]:
+					print 'Longitude: ' + str(self.longitude[index])
+				if self.on_ground[index]:
+					print 'Is the aircraft currently on the ground: ' + str(self.on_ground[index])
+				if self.sensors[index]:
+					print 'Sensors that received messages: ' + str(self.sensors[index])
+				if self.time_position[index]:
+					print 'Seconds since epoch of last position report: ' + str(self.time_position[index])
+				if self.time_velocity[index]:
+					print 'Seconds since epoch of last velocity report: ' + str(self.time_velocity[index])
+				if self.velocity[index]:
+					print 'Velocity over ground in m/s: ' + str(self.velocity[index])
+				if self.vertical_rate[index]:
+					print 'Vertical Rate in m/s, incline is positive, decline negative: ' + str(self.vertical_rate[index])
+				print '----------------------------'
 
 
 
 if __name__ == "__main__":
-	ap = argparse.ArgumentParser(description ='Grab the required aircraft detail')
+	ap = argparse.ArgumentParser(description ='Learn about the aircraft flying above you')
 	ap.add_argument('-c', help="origin country")
 	if len(sys.argv) > 1:
 		opts = vars(ap.parse_args())
